@@ -11,7 +11,7 @@ def GridLayout(win):
 			square = Rectangle(Point(row, colum), Point(row+100, colum+100))
 			square.draw(win)
 
-			lst.append(tepLst)
+			lst.append(tepLst)	
 
 	return lst
 

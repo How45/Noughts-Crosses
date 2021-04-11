@@ -11,7 +11,7 @@ def GridLayout(win):
 			square = Rectangle(Point(row, colum), Point(row+100, colum+100))
 			square.draw(win)
 
-			lst.append(tepLst)	
+			lst.append(tepLst)
 
 	return lst
 
@@ -62,7 +62,7 @@ def CirlcePoint(win,lst,bLst,cLst):
 	checkSame = False
 	index = 0
 
-	while index != 1:
+	while index == 0:
 		lstCount = 0
 		user = win.getMouse()
 
@@ -95,20 +95,77 @@ def CheckIfRepeat(lst,clst):
 
 	return False
 
+def CheckWin(wlst,num):
+
+	if wlst[0] == num and wlst[1] == num and wlst[2] == num: # X axis
+		return False
+	elif wlst[3] == num and wlst[4] == num and wlst[5] == num:
+		return False
+	elif wlst[6] == num and wlst[7] == num and wlst[8] == num:
+		return False
+
+	elif wlst[0] == num and wlst[3] == num and wlst[6] == num: # Y axis
+		return False
+	elif wlst[1] == num and wlst[4] == num and wlst[7] == num:
+		return False
+	elif wlst[2] == num and wlst[5] == num and wlst[8] == num:
+		return False
+
+	elif wlst[0] == num and wlst[4] == num and wlst[8] == num:
+		return False
+	elif wlst[2] == num and wlst[4] == num and wlst[6] == num:
+		return False
+
+	return True
+
+def CheckDraw(wLst):
+	draw = 0
+	for i in wLst:
+		if i != 0:
+			draw += 1
+				
+		if draw == 9:
+			return False
+	return True
 
 # Main /--------------------------------------------------------------------------------------\
-def main():
-	win = GraphWin("My Circle",300,300)
+def Game():
+	win = GraphWin("Noughts&Crosses",300,300)
 	winGrid = [0,0,0,
 			   0,0,0,
 			   0,0,0]
 
 	lstGridLayout = GridLayout(win)
 	checkLst = []
+	draw = 0
 
-	while(True):
+	end = True
+
+	while(end != False):
+
 		checkLst, winGrid = CrossPoint(win,lstGridLayout,winGrid,checkLst)
+		winner = CheckWin(winGrid,1)
+		draw = CheckDraw(winGrid)
+
+
+		if winner == False:
+			print("X Won!")
+			win.close()
+			break
+
+		if draw == False:
+			print("Draw")
+			win.close()
+			break
+
 
 		checkLst, winGrid = CirlcePoint(win,lstGridLayout,winGrid,checkLst)
-		print(winGrid)
-main()
+		winner = CheckWin(winGrid,2)
+
+		if winner == False:
+			print("O Won!")
+			win.close()
+			break
+
+	print("GG")
+Game()

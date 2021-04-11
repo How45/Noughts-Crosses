@@ -3,12 +3,12 @@ from graphics import *
 def GridLayout(win):
 	lst = []
 
-	for colume in range(0,300,100):
+	for column in range(0,300,100):
 		for row in range(0,300,100):
 			tepLst = []
-			tepLst.extend([row,colume,row+100,colume+100])
+			tepLst.extend([row,column,row+100,column+100])
 
-			square = Rectangle(Point(row, colume), Point(row+100, colume+100))
+			square = Rectangle(Point(row, column), Point(row+100, column+100))
 			square.draw(win)
 
 			lst.append(tepLst)

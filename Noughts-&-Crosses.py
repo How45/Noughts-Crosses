@@ -3,12 +3,12 @@ from graphics import *
 def GridLayout(win):
 	lst = []
 
-	for colum in range(0,300,100):
+	for colume in range(0,300,100):
 		for row in range(0,300,100):
 			tepLst = []
-			tepLst.extend([row,colum,row+100,colum+100])
+			tepLst.extend([row,colume,row+100,colume+100])
 
-			square = Rectangle(Point(row, colum), Point(row+100, colum+100))
+			square = Rectangle(Point(row, colume), Point(row+100, colume+100))
 			square.draw(win)
 
 			lst.append(tepLst)
@@ -123,7 +123,7 @@ def CheckDraw(wLst):
 	for i in wLst:
 		if i != 0:
 			draw += 1
-				
+
 		if draw == 9:
 			return False
 	return True
@@ -167,5 +167,5 @@ def Game():
 			win.close()
 			break
 
-	print("GG")
+	print("GG, Play Again?")
 Game()

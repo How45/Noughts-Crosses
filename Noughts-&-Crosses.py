@@ -35,21 +35,17 @@ def CrossPoint(win,lst,bLst,cLst):
 			if user.x>i[0] and user.y>i[1] and user.x<i[2] and user.y<i[3]:
 				checkSame = CheckIfRepeat(i,cLst)
 				break
-
 			else:
 				lstCount += 1
 
 		if checkSame == False:
-
 			cLst.append(i)
 			bLst[lstCount] = 1
 			DrawCross(win,i)
 			index = 1
 
-
 		elif checkSame == True:
 			print("Can't do it there")
-
 
 	return cLst,bLst
 
@@ -70,21 +66,17 @@ def CirlcePoint(win,lst,bLst,cLst):
 			if user.x>i[0] and user.y>i[1] and user.x<i[2] and user.y<i[3]:
 				checkSame = CheckIfRepeat(i,cLst)
 				break
-
 			else:
 				lstCount += 1
 
 		if checkSame == False:
-
 			cLst.append(i)
 			bLst[lstCount] = 2
 			DrawCirlce(win,i)
 			index = 1
 
-
 		elif checkSame == True:
 			print("Can't do it there")
-
 
 	return cLst,bLst
 
@@ -92,7 +84,6 @@ def CheckIfRepeat(lst,clst):
 	for i in clst:
 		if lst == i:
 			return True
-
 	return False
 
 def CheckWin(wlst,num):
@@ -139,14 +130,11 @@ def Game():
 	checkLst = []
 	draw = 0
 
-	end = True
-
-	while(end != False):
+	while(True):
 
 		checkLst, winGrid = CrossPoint(win,lstGridLayout,winGrid,checkLst)
 		winner = CheckWin(winGrid,1)
 		draw = CheckDraw(winGrid)
-
 
 		if winner == False:
 			print("X Won!")
@@ -157,7 +145,6 @@ def Game():
 			print("Draw")
 			win.close()
 			break
-
 
 		checkLst, winGrid = CirlcePoint(win,lstGridLayout,winGrid,checkLst)
 		winner = CheckWin(winGrid,2)

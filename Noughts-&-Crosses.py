@@ -83,29 +83,44 @@ def CirlcePoint(win,lst,bLst,cLst):
 
 # BotTurn /--------------------------------------------------------------------------------------\
 def BotPick(win,lst,bLst,cLst):
-	while(True):
-		# Mid
-		if CheckIfRepeat(lst[4],cLst) != True:
-			cLst.append(lst[4])
-			bLst[4] = 2
-			DrawCirlce(win,lst[4])
+
+	# Pick Winning position
+	for i in range(len(lst)):
+		nLst = bLst[:]
+
+		if nLst[i-1] == 0:
+			nLst[i-1] = 2
+
+			if CheckWin(nLst,2) == False:
+				DrawCirlce(win,lst[i-1])
+				cLst.append(lst[i-1])
+				bLst[i-1] = 2
+				return cLst,bLst
+			else:
+				nLst[i-1] = 3
+
+	# Mid
+	if CheckIfRepeat(lst[4],cLst) != True:
+		cLst.append(lst[4])
+		bLst[4] = 2
+		DrawCirlce(win,lst[4])
+		return cLst,bLst
+
+	# Corners
+	for i in [0,2,6,8]:
+		if CheckIfRepeat(lst[i],cLst) != True:
+			cLst.append(lst[i])
+			bLst[i] = 2
+			DrawCirlce(win,lst[i])
 			return cLst,bLst
 
-		# Corners
-		for i in [0,2,6,8]:
-			if CheckIfRepeat(lst[i],cLst) != True:
-				cLst.append(lst[i])
-				bLst[i] = 2
-				DrawCirlce(win,lst[i])
-				return cLst,bLst
-				
-		# OuterMid
-		for i in range(1,7,2):
-			if CheckIfRepeat(lst[i],cLst) != True:
-				cLst.append(lst[i])
-				bLst[i] = 2
-				DrawCirlce(win,lst[i])
-				return cLst,bLst
+	# OuterMid
+	for i in [1,3,5,7]:
+		if CheckIfRepeat(lst[i],cLst) != True:
+			cLst.append(lst[i])
+			bLst[i] = 2
+			DrawCirlce(win,lst[i])
+			return cLst,bLst
 
 
 # Checking Stuff /--------------------------------------------------------------------------------------\
@@ -161,7 +176,6 @@ def main():
 
 		# checkLst, winGrid = CirlcePoint(win,lstGridLayout,winGrid,checkLst)
 		checkLst, winGrid = BotPick(win,lstGridLayout,winGrid,checkLst)
-		print(winGrid)
 		winner = CheckWin(winGrid,2)
 
 		if winner == False:
@@ -174,4 +188,4 @@ main()
 
 # AI ALgorithm
 # 	We wanna check if we can win (if cant) V
-#  	We wanna check if player might win and block him (if player has no possible moves to win) v
+#  	We wanna check if player might win and block him (if player has no possible moves to win) V

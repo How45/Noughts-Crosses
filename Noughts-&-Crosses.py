@@ -178,6 +178,11 @@ def main():
 	checkLst = [] # This will look like lstGridLayout if there is a draw (A cord is added each time a player places a X or O)
 	draw = 0
 
+	botOrNot = int(input("Play with Bot [1] or Player2 [2]: "))
+	if botOrNot != 1 and botOrNot != 2:
+		print("Invaild")
+		main()
+
 	while(True):
 
 		checkLst, winGrid = CrossPoint(win,lstGridLayout,winGrid,checkLst)
@@ -194,8 +199,10 @@ def main():
 			win.close()
 			break
 
-		# checkLst, winGrid = CirlcePoint(win,lstGridLayout,winGrid,checkLst)
-		checkLst, winGrid = BotPick(win,lstGridLayout,winGrid,checkLst)
+		if botOrNot == 2:	
+			checkLst, winGrid = CirlcePoint(win,lstGridLayout,winGrid,checkLst)
+		elif botOrNot == 1:
+			checkLst, winGrid = BotPick(win,lstGridLayout,winGrid,checkLst)
 		winner = CheckWin(winGrid,2)
 
 		if winner == False:
@@ -203,10 +210,9 @@ def main():
 			win.close()
 			break
 
-	print("GG, Play Again?")
-	print("Well you cant")
+	again = input("GG, Play Again (Y/N): ")
+	if again.lower() == "y" or again.lower() == "yes":
+		main()
+	else:
+		print("Bye")
 main()
-
-# AI ALgorithm
-# 	We wanna check if we can win (if cant) V
-#  	We wanna check if player might win and block him (if player has no possible moves to win) V

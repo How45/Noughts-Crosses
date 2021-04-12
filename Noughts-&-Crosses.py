@@ -88,23 +88,7 @@ def CheckIfRepeat(lst,clst):
 
 def CheckWin(wlst,num):
 
-	if wlst[0] == num and wlst[1] == num and wlst[2] == num: # X axis
-		return False
-	elif wlst[3] == num and wlst[4] == num and wlst[5] == num:
-		return False
-	elif wlst[6] == num and wlst[7] == num and wlst[8] == num:
-		return False
-
-	elif wlst[0] == num and wlst[3] == num and wlst[6] == num: # Y axis
-		return False
-	elif wlst[1] == num and wlst[4] == num and wlst[7] == num:
-		return False
-	elif wlst[2] == num and wlst[5] == num and wlst[8] == num:
-		return False
-
-	elif wlst[0] == num and wlst[4] == num and wlst[8] == num:
-		return False
-	elif wlst[2] == num and wlst[4] == num and wlst[6] == num:
+	if (wlst[0] == num and wlst[1] == num and wlst[2] == num) or (wlst[3] == num and wlst[4] == num and wlst[5] == num) or (wlst[6] == num and wlst[7] == num and wlst[8] == num) or (wlst[0] == num and wlst[3] == num and wlst[6] == num) or (wlst[1] == num and wlst[4] == num and wlst[7] == num) or (wlst[2] == num and wlst[5] == num and wlst[8] == num) or (wlst[0] == num and wlst[4] == num and wlst[8] == num) or (wlst[2] == num and wlst[4] == num and wlst[6] == num):
 		return False
 
 	return True
@@ -156,3 +140,9 @@ def Game():
 
 	print("GG, Play Again?")
 Game()
+
+# AI ALgorithm
+# 	We wanna check if we can win (if cant) V
+#  	We wanna check if player might win and block him (if player has no possible moves to win) v
+# 	We want to always go to the centre (if cant) V
+#   We want to check if the outside of the square arnt full (if fall) V

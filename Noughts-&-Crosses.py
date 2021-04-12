@@ -92,19 +92,13 @@ def BotPick(win,lst,bLst,cLst):
 			return cLst,bLst
 
 		# Corners
-		for i in range(0,4,2):
+		for i in [0,2,6,8]:
 			if CheckIfRepeat(lst[i],cLst) != True:
 				cLst.append(lst[i])
 				bLst[i] = 2
 				DrawCirlce(win,lst[i])
 				return cLst,bLst
-		for i in range(6,9,2):
-			if CheckIfRepeat(lst[i],cLst) != True:
-				cLst.append(lst[i])
-				bLst[i] = 2
-				DrawCirlce(win,lst[i])
-				return cLst,bLst
-
+				
 		# OuterMid
 		for i in range(1,7,2):
 			if CheckIfRepeat(lst[i],cLst) != True:

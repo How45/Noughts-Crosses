@@ -1,5 +1,6 @@
 from graphics import *
 
+# Grid /--------------------------------------------------------------------------------------\
 def GridLayout(win):
 	lst = []
 
@@ -80,6 +81,40 @@ def CirlcePoint(win,lst,bLst,cLst):
 
 	return cLst,bLst
 
+# BotTurn /--------------------------------------------------------------------------------------\
+def BotPick(win,lst,bLst,cLst):
+	while(True):
+		# Mid
+		if CheckIfRepeat(lst[4],cLst) != True:
+			cLst.append(lst[4])
+			bLst[4] = 2
+			DrawCirlce(win,lst[4])
+			return cLst,bLst
+
+		# Corners
+		for i in range(0,4,2):
+			if CheckIfRepeat(lst[i],cLst) != True:
+				cLst.append(lst[i])
+				bLst[i] = 2
+				DrawCirlce(win,lst[i])
+				return cLst,bLst
+		for i in range(6,9,2):
+			if CheckIfRepeat(lst[i],cLst) != True:
+				cLst.append(lst[i])
+				bLst[i] = 2
+				DrawCirlce(win,lst[i])
+				return cLst,bLst
+
+		# OuterMid
+		for i in range(1,7,2):
+			if CheckIfRepeat(lst[i],cLst) != True:
+				cLst.append(lst[i])
+				bLst[i] = 2
+				DrawCirlce(win,lst[i])
+				return cLst,bLst
+
+
+# Checking Stuff /--------------------------------------------------------------------------------------\
 def CheckIfRepeat(lst,clst):
 	for i in clst:
 		if lst == i:
@@ -104,14 +139,14 @@ def CheckDraw(wLst):
 	return True
 
 # Main /--------------------------------------------------------------------------------------\
-def Game():
+def main():
 	win = GraphWin("Noughts&Crosses",300,300)
 	winGrid = [0,0,0,
 			   0,0,0,
-			   0,0,0]
+			   0,0,0] # Contaias the points were the player has placed something (Atm no one has done anything)
 
-	lstGridLayout = GridLayout(win)
-	checkLst = []
+	lstGridLayout = GridLayout(win) # [[0,0,100,100],[100,0,200,200],...,[200,200,300,300]]
+	checkLst = [] # This will look like lstGridLayout if there is a draw (A cord is added each time a player places a X or O)
 	draw = 0
 
 	while(True):
@@ -130,7 +165,9 @@ def Game():
 			win.close()
 			break
 
-		checkLst, winGrid = CirlcePoint(win,lstGridLayout,winGrid,checkLst)
+		# checkLst, winGrid = CirlcePoint(win,lstGridLayout,winGrid,checkLst)
+		checkLst, winGrid = BotPick(win,lstGridLayout,winGrid,checkLst)
+		print(winGrid)
 		winner = CheckWin(winGrid,2)
 
 		if winner == False:
@@ -139,10 +176,8 @@ def Game():
 			break
 
 	print("GG, Play Again?")
-Game()
+main()
 
 # AI ALgorithm
 # 	We wanna check if we can win (if cant) V
 #  	We wanna check if player might win and block him (if player has no possible moves to win) v
-# 	We want to always go to the centre (if cant) V
-#   We want to check if the outside of the square arnt full (if fall) V

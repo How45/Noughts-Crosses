@@ -23,7 +23,7 @@ def DrawCross(win,lst):
 
 	line2 = Line(Point(lst[0],lst[3]),Point(lst[2],lst[1]))
 	line2.draw(win)
-
+# Player One /--------------------------------------------------------------------------------------\
 def CrossPoint(win,lst,bLst,cLst):
 	checkSame = False
 	index = 0
@@ -54,7 +54,7 @@ def CrossPoint(win,lst,bLst,cLst):
 def DrawCirlce(win,lst):
 	circle = Circle(Point(lst[0]+50,lst[1]+50),50)
 	circle.draw(win)
-
+# PlayerTwo /--------------------------------------------------------------------------------------\
 def CirlcePoint(win,lst,bLst,cLst):
 	checkSame = False
 	index = 0
@@ -86,42 +86,62 @@ def BotPick(win,lst,bLst,cLst):
 
 	# Pick Winning position
 	for i in range(len(lst)):
-		nLst = bLst[:]
+		winLst = bLst[:]
 
-		if nLst[i-1] == 0:
-			nLst[i-1] = 2
+		if winLst[i-1] == 0:
+			winLst[i-1] = 2
 
-			if CheckWin(nLst,2) == False:
+			if CheckWin(winLst,2) == False:
 				DrawCirlce(win,lst[i-1])
 				cLst.append(lst[i-1])
 				bLst[i-1] = 2
 				return cLst,bLst
 			else:
-				nLst[i-1] = 3
+				winLst[i-1] = 3
 
-	# Mid
-	if CheckIfRepeat(lst[4],cLst) != True:
-		cLst.append(lst[4])
-		bLst[4] = 2
-		DrawCirlce(win,lst[4])
-		return cLst,bLst
+	# Sees if Opponet is gonna win
+	for i in range(len(lst)):
+		blockLst = bLst[:]
 
-	# Corners
-	for i in [0,2,6,8]:
-		if CheckIfRepeat(lst[i],cLst) != True:
-			cLst.append(lst[i])
-			bLst[i] = 2
-			DrawCirlce(win,lst[i])
-			return cLst,bLst
+		if blockLst[i-1] == 0:
+			blockLst[i-1] = 1
 
-	# OuterMid
-	for i in [1,3,5,7]:
-		if CheckIfRepeat(lst[i],cLst) != True:
-			cLst.append(lst[i])
-			bLst[i] = 2
-			DrawCirlce(win,lst[i])
-			return cLst,bLst
+			if CheckWin(blockLst,1) == False:
+				DrawCirlce(win,lst[i-1])
+				cLst.append(lst[i-1])
+				bLst[i-1] = 2
+				return cLst,bLst
+			else:
+				blockLst[i-1] = 3
 
+	# Random on the free spaces
+	while (True):
+		import random
+		r = random.randrange(0,4)
+
+		if r == 1:
+			# Mid
+			if CheckIfRepeat(lst[4],cLst) != True:
+				cLst.append(lst[4])
+				bLst[4] = 2
+				DrawCirlce(win,lst[4])
+				return cLst,bLst
+		elif r == 2:
+			# Corners
+			for i in [0,2,6,8]:
+				if CheckIfRepeat(lst[i],cLst) != True:
+					cLst.append(lst[i])
+					bLst[i] = 2
+					DrawCirlce(win,lst[i])
+					return cLst,bLst
+		elif r == 3:
+			# OuterMid
+			for i in [1,3,5,7]:
+				if CheckIfRepeat(lst[i],cLst) != True:
+					cLst.append(lst[i])
+					bLst[i] = 2
+					DrawCirlce(win,lst[i])
+					return cLst,bLst
 
 # Checking Stuff /--------------------------------------------------------------------------------------\
 def CheckIfRepeat(lst,clst):

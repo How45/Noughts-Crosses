@@ -204,6 +204,7 @@ def main():
 			break
 
 	print("GG, Play Again?")
+	print("Well you cant")
 main()
 
 # AI ALgorithm

@@ -1,6 +1,6 @@
-import helper as hp
-import bot
-import players as pl
+import Stuff.helper as hp
+import Stuff.bot
+import Stuff.players as pl
 
 def main():
 	win = hp.GraphWin("Noughts&Crosses",300,300)

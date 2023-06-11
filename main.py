@@ -21,7 +21,7 @@ def main():
 
 		check_list, win_grid = pl.cross_point(win,list_grid_layout,win_grid,check_list)
 		winner = hp.check_win(win_grid,1)
-		draw = hp.CheckDraw(win_grid)
+		draw = hp.check_draw(win_grid)
 
 		if winner == False:
 			print("X Won!")
@@ -37,7 +37,7 @@ def main():
 			check_list, win_grid = pl.cirlce_point(win,list_grid_layout,win_grid,check_list)
 		elif bot_or_not == 1:
 			check_list, win_grid = bot.bot_turn(win,list_grid_layout,win_grid,check_list)
-		winner = hp.CheckWin(win_grid,2)
+		winner = hp.check_win(win_grid,2)
 
 		if winner == False:
 			print("O Won!")

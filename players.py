@@ -10,7 +10,7 @@ def cross_point(win,lst,table,c_list):
 
 		for i in lst:
 			if user.x>i[0] and user.y>i[1] and user.x<i[2] and user.y<i[3]:
-				check_same = hp.CheckIfRepeat(i,c_list)
+				check_same = hp.if_repeat(i,c_list)
 				break
 			else:
 				table_pos += 1
@@ -36,7 +36,7 @@ def cirlce_point(win,lst,table,c_list):
 
 		for i in lst:
 			if user.x>i[0] and user.y>i[1] and user.x<i[2] and user.y<i[3]:
-				check_same = hp.CheckIfRepeat(i,c_list)
+				check_same = hp.if_repeat(i,c_list)
 				break
 			else:
 				table_pos += 1

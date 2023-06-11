@@ -1,8 +1,8 @@
 from graphics import *
 # Checking Stuff /--------------------------------------------------------------------------------------\
-def if_repeat(lst,clst):
-	for i in clst:
-		if lst == i:
+def if_repeat(table,client_table):
+	for i in client_table:
+		if table == i:
 			return True
 	return False
 
@@ -25,28 +25,28 @@ def check_draw(window_table):
 
 # Drawing things
 # Draw Circle /--------------------------------------------------------------------------------------\
-def draw_circle(win,lst):
-	circle = Circle(Point(lst[0]+50,lst[1]+50),50)
+def draw_circle(win,table):
+	circle = Circle(Point(table[0]+50,table[1]+50),50)
 	circle.draw(win)
 # Draw Cross /--------------------------------------------------------------------------------------\
-def draw_cross(win,lst):
-	line = Line(Point(lst[0],lst[1]),Point(lst[2],lst[3]))
+def draw_cross(win,table):
+	line = Line(Point(table[0],table[1]),Point(table[2],table[3]))
 	line.draw(win)
 
-	line2 = Line(Point(lst[0],lst[3]),Point(lst[2],lst[1]))
+	line2 = Line(Point(table[0],table[3]),Point(table[2],table[1]))
 	line2.draw(win)
 # Grid /--------------------------------------------------------------------------------------\
 def grid_layout(win):
-	lst = []
+	table = []
 
 	for column in range(0,300,100):
 		for row in range(0,300,100):
-			tepLst = []
-			tepLst.extend([row,column,row+100,column+100])
+			temp_table = []
+			temp_table.extend([row,column,row+100,column+100])
 
 			square = Rectangle(Point(row, column), Point(row+100, column+100))
 			square.draw(win)
 
-			lst.append(tepLst)
+			table.append(temp_table)
 
-	return lst
+	return table
